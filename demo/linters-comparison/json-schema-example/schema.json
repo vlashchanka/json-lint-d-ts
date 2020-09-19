@@ -1,0 +1,26 @@
+{
+    "type": "object",
+    "required": [
+        "name",
+        "level",
+        "id"
+    ],
+    "additionalProperties": [
+        "description"
+    ],
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "level": {
+            "type": "string",
+            "enum": ["level", "warn"]
+        },
+        "id": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        }
+    }
+}

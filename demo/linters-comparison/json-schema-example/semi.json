@@ -1,0 +1,6 @@
+{
+  "id": "rule-semi",
+  "name": "semi",
+  "description": "Rule to describe usage of semicolons",
+  "level": "warning"
+}

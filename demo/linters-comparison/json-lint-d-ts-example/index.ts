@@ -1,9 +1,9 @@
 import { validate } from "json-lint-d-ts";
 
 const result = validate([
-    ["./semi.json", "./linter.d.ts"],
+    ["./semi.json", "./semi.d.ts"],
 ], {
-    isDiagnosticsFileCreated: true,
+    isDiagnosticsFileCreated: false,
 });
 console.log(result);
 
