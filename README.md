@@ -1,7 +1,7 @@
 json-lint-d-ts
 ------
 
-![image](assets/logo.svg)
+![image](assets/icon.svg)
 ------
 
 Write type safe json files in your project with Typescript.
