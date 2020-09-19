@@ -18,6 +18,17 @@ import { validate } from "json-lint-d-ts";
 const result = validate([
     ["./hello.json", "./hello.d.ts"],
 ]);
+
+/**
+[
+  {
+    jsonPath: './hello.json',
+    jsonErrors: [
+      `hello.json (13,3): Type '"World"' is not assignable to type '"world"'.`
+    ]
+  }
+]
+*/
 console.log(result);
 ```
 
