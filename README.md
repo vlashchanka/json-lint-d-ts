@@ -19,7 +19,7 @@ const result = validate([
     ["./hello.json", "./hello.d.ts"],
 ]);
 
-/**
+/*
 [
   {
     jsonPath: './hello.json',
