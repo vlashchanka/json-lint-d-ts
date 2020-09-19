@@ -19,7 +19,6 @@
   },
   "author": "vitalij.lashenko@gmail.com",
   "license": "MIT",
-  "private": true,
   "dependencies": {
     "typescript": "^4.0.2"
   },
