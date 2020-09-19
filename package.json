@@ -11,7 +11,8 @@
     "build": "tsc",
     "test": "jest",
     "lint": "eslint src/**/*.ts",
-    "prepare": "yarn lint && yarn test && yarn build"
+    "prepare": "yarn lint && yarn test && yarn build",
+    "ci": "yarn prepare"
   },
   "repository": {
     "type": "git",
