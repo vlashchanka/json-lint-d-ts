@@ -9,8 +9,9 @@
   ],
   "scripts": {
     "build": "tsc",
+    "test": "jest",
     "lint": "eslint src/**/*.ts",
-    "prepare": "npm run build"
+    "prepare": "yarn lint && yarn test && yarn build"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,13 @@
     "typescript": "^4.0.2"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-typescript": "^7.10.4",
+    "@types/jest": "^26.0.14",
     "@types/node": "^14.11.1",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
-    "eslint": "^7.9.0"
+    "eslint": "^7.9.0",
+    "jest": "^26.4.2"
   }
 }
