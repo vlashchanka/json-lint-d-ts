@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
+    "lint": "eslint src/**/*.ts",
     "prepare": "npm run build"
   },
   "repository": {
@@ -22,6 +23,9 @@
     "typescript": "^4.0.2"
   },
   "devDependencies": {
-    "@types/node": "^14.11.1"
+    "@types/node": "^14.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "eslint": "^7.9.0"
   }
 }

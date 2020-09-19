@@ -1,6 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
-import * as ts from "typescript"
+import * as ts from "typescript";
 
 export type JsonError = Readonly<{
     jsonPath: string;
@@ -68,7 +68,7 @@ function compileTsAndGetErrors(virtualFileName: string, options: ValidatorCompil
     const emitResult = program.emit();
     const diagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
     return diagnostics.map((diagnostic: ts.Diagnostic) => {
-        return diagnosticToMessage(diagnostic, validationOptions)
+        return diagnosticToMessage(diagnostic, validationOptions);
     });
 }
 
