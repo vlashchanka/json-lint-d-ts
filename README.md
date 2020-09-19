@@ -11,7 +11,7 @@ Write type safe json files in your project with Typescript.
 
 ## Usage
 
-Import `validate` function and pass all your JSON files paths with their type declarations:
+Import `validate` function and pass all your JSON files paths with their type declarations.
 
 ```typescript
 import { validate } from "json-lint-d-ts";
@@ -33,7 +33,9 @@ const result = validate([
 console.log(result);
 ```
 
-Failing typescript declaration example:
+Typescript declaration example:
+
+⚠️ it is important to have `type Root` in your `d.ts` file ⚠️
 
 ```typescript
 interface HelloLowerCase {
@@ -48,8 +50,6 @@ type HelloType = HelloLowerCase | HelloUpperCase;
 type Root = HelloType
 
 ```
-
-⚠️ it is important to have `type Root` in your `d.ts` file ⚠️
 
 The `result` of the validation:
 
