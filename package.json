@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:vlashchanka/ts-validator.git"
+    "url": "git@github.com:vlashchanka/json-lint-d-ts.git"
   },
   "author": "vitalij.lashenko@gmail.com",
   "license": "MIT",
