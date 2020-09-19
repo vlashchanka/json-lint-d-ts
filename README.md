@@ -10,7 +10,8 @@ Write type safe json files in your project with Typescript.
 `yarn -D json-lint-d-ts`
 
 ## Usage
-First, import `validate` function and pass all your JSON files paths with their type declarations:
+
+Import `validate` function and pass all your JSON files paths with their type declarations:
 
 ```typescript
 import { validate } from "json-lint-d-ts";
@@ -32,17 +33,7 @@ const result = validate([
 console.log(result);
 ```
 
-An example of json file *hello.json*:
-
-```json
-{
-  "hello": "World"
-}
-```
-
-A dummy example of failing typescript declaration for it:
-
-⚠️ it is important to have `type Root` in your `d.ts`  file ⚠️
+Failing typescript declaration example:
 
 ```typescript
 interface HelloLowerCase {
@@ -58,7 +49,9 @@ type Root = HelloType
 
 ```
 
-The `result` variable should contain after run:
+⚠️ it is important to have `type Root` in your `d.ts` file ⚠️
+
+The `result` of the validation:
 
 ```shell script
 [
@@ -71,7 +64,7 @@ The `result` variable should contain after run:
 ]
 ```
 
-The described above example could be found in `demo/hello-world` folder.
+The usage example could be found in `demo/hello-world` folder.
 
 ## How does all this work?
 Under the hood *json-lint-d-ts* uses Typescript Compiler by extending compiler host.
