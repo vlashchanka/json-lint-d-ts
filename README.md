@@ -7,7 +7,7 @@ Write type safe json files in your project with Typescript.
 `yarn -D json-lint-d-ts`
 
 ## Usage
-First, import the validate function and pass all your JSON files paths with their type declarations:
+First, import `validate` function and pass all your JSON files paths with their type declarations:
 
 ```typescript
 import { validate } from "json-lint-d-ts";
@@ -26,7 +26,9 @@ An example of json file *hello.json*:
 }
 ```
 
-An dummy example of failing typescript declaration for it:
+A dummy example of failing typescript declaration for it:
+
+⚠️ it is important to have `type Root` in your `d.ts`  file ⚠️
 
 ```typescript
 interface HelloLowerCase {
@@ -64,3 +66,7 @@ The result is extracted from diagnostics.
 
 ## Contributing
 Please do!
+
+## Enjoy
+
+🚀
