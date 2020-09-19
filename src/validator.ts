@@ -2,29 +2,14 @@ import * as fs from "fs";
 import * as path from "path";
 import * as ts from "typescript"
 
-type R = typeof fs.readFileSync;
-type W = typeof fs.writeFileSync;
-
-type IO<M = (R | W | (R | W) | (R & W) ), S = void> = S;
-
-type TempName = string;
-type TempFileContents = string;
-type TempFile = [TempName, TempFileContents]
-
-export type ValidatorCompilerOptions = Readonly<ts.CompilerOptions & {
-    target: ts.ScriptTarget
-}>;
-
 export type JsonError = Readonly<{
     jsonPath: string;
     jsonErrors: string[];
 }>
 
-export type JsonPathWithTypePath = [string, string];
-
-export interface ValidationOptions {
-    isDiagnosticsFileCreated: boolean;
-}
+export type ValidatorCompilerOptions = Readonly<ts.CompilerOptions & {
+    target: ts.ScriptTarget
+}>;
 
 export const defaultTsValidatorCompilerOptions: ValidatorCompilerOptions = {
     transpileOnly: true,
@@ -33,6 +18,17 @@ export const defaultTsValidatorCompilerOptions: ValidatorCompilerOptions = {
     strictNullChecks: true,
     target: ts.ScriptTarget.ES5,
 };
+
+type TempName = string;
+type TempFileContents = string;
+type TempFile = [TempName, TempFileContents]
+
+export type JsonPathWithTypePath = [string, string];
+
+export interface ValidationOptions {
+    isDiagnosticsFileCreated: boolean;
+}
+
 
 function getConfigDefinitionInTS(configFileContents: Buffer): string {
     return `const config: Root = ${configFileContents}`;
@@ -46,13 +42,13 @@ function prepareConfigContentsAndName(configPath: string, typesContents: string)
     return {tempTsFileName, tempTsFileContents};
 }
 
-function writeTempTsFile(configPath: string, typesContents: string): IO<W, string> {
+function writeTempTsFile(configPath: string, typesContents: string): string {
     const {tempTsFileName, tempTsFileContents} = prepareConfigContentsAndName(configPath, typesContents);
     fs.writeFileSync(tempTsFileName, tempTsFileContents);
     return tempTsFileName;
 }
 
-function getTempTsFileContents(configPath: string, typesContents: string): IO<R, TempFile> {
+function getTempTsFileContents(configPath: string, typesContents: string): TempFile {
     const {tempTsFileName, tempTsFileContents} = prepareConfigContentsAndName(configPath, typesContents);
     return [tempTsFileName, tempTsFileContents];
 }
@@ -99,7 +95,7 @@ export function validate(
         isDiagnosticsFileCreated: false,
     },
     compilerOptions = defaultTsValidatorCompilerOptions
-): IO<R | R & W, ReadonlyArray<JsonError>>  {
+): ReadonlyArray<JsonError>  {
     const errors: JsonError[] = [];
     for (const [jsonFile, typesPath] of jsonWithDeclaration) {
         const typesContents = fs.readFileSync(
