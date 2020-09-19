@@ -11,8 +11,22 @@ type TempName = string;
 type TempFileContents = string;
 type TempFile = [TempName, TempFileContents]
 
+export type ValidatorCompilerOptions = Readonly<ts.CompilerOptions & {
+    target: ts.ScriptTarget
+}>;
 
-const tsOptions: ts.CompilerOptions = {
+export type JsonError = Readonly<{
+    jsonPath: string;
+    jsonErrors: string[];
+}>
+
+export type JsonPathWithTypePath = [string, string];
+
+export interface ValidationOptions {
+    isDiagnosticsFileCreated: boolean;
+}
+
+export const defaultTsValidatorCompilerOptions: ValidatorCompilerOptions = {
     transpileOnly: true,
     skipLibCheck: true,
     noEmit: true,
@@ -20,9 +34,7 @@ const tsOptions: ts.CompilerOptions = {
     target: ts.ScriptTarget.ES5,
 };
 
-const IS_DIAGNOSTICS_FILE_CREATED = false;
-
-function getConfigDefinitionInTS(configFileContents) {
+function getConfigDefinitionInTS(configFileContents: Buffer): string {
     return `const config: Root = ${configFileContents}`;
 }
 
@@ -45,40 +57,12 @@ function getTempTsFileContents(configPath: string, typesContents: string): IO<R,
     return [tempTsFileName, tempTsFileContents];
 }
 
-type ConfigError = Readonly<{
-    configPath: string;
-    configErrors: string[];
-}>
-
-function validateConfigsWithTs(configPaths): IO<R | R & W, ReadonlyArray<ConfigError>>  {
-    const errors = [];
-    for (const [configPath, typesPath] of configPaths) {
-        const typesContents = fs.readFileSync(
-            path.join(__dirname, typesPath)
-        ).toString();
-
-        if (IS_DIAGNOSTICS_FILE_CREATED) {
-            writeTempTsFile(configPath, typesContents);
-        }
-
-        const [tempTsFileName, tempTsFileContents] = getTempTsFileContents(configPath, typesContents);
-        const configErrors = compileTsAndGetErrors([tempTsFileName], tsOptions, tempTsFileContents);
-        if (configErrors.length) {
-            errors.push({
-                configPath: configPath,
-                configErrors: configErrors,
-            });
-        }
-    }
-    return errors;
-}
-
-function compileTsAndGetErrors([virtualFileName], options: ts.CompilerOptions, contents: string): string[] {
+function compileTsAndGetErrors(virtualFileName: string, options: ValidatorCompilerOptions, contents: string, validationOptions: ValidationOptions): string[] {
     const compilerHostOriginal = ts.createCompilerHost(options);
     const originalGetSourceFile = compilerHostOriginal.getSourceFile;
     const compilerHost = {
         ...compilerHostOriginal,
-        getSourceFile: (filename, languageVersion) => {
+        getSourceFile: (filename: string, languageVersion: ValidatorCompilerOptions["target"]) => {
             if (filename === virtualFileName)
                 return ts.createSourceFile(filename, contents, options.target);
             return originalGetSourceFile(filename, languageVersion);
@@ -87,27 +71,56 @@ function compileTsAndGetErrors([virtualFileName], options: ts.CompilerOptions, c
     const program = ts.createProgram([virtualFileName], options, compilerHost);
     const emitResult = program.emit();
     const diagnostics = ts.getPreEmitDiagnostics(program).concat(emitResult.diagnostics);
-    return diagnostics.map(diagnosticToMessage);
+    return diagnostics.map((diagnostic: ts.Diagnostic) => {
+        return diagnosticToMessage(diagnostic, validationOptions)
+    });
 }
 
-function diagnosticToMessage(diagnostic: ts.Diagnostic): string {
+function diagnosticToMessage(diagnostic: ts.Diagnostic, validationOptions: ValidationOptions): string {
     if (!diagnostic.file) {
         return `${ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n")}`;
     }
     const {
         line,
         character,
-    } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start);
+    } = diagnostic.file.getLineAndCharacterOfPosition(diagnostic.start!);
     const text = ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n");
     let diagnosticsFileName = diagnostic.file.fileName.slice(0,-3);
 
-    if (IS_DIAGNOSTICS_FILE_CREATED) {
+    if (validationOptions.isDiagnosticsFileCreated) {
         diagnosticsFileName = diagnosticsFileName.slice(0,-3);
     }
     return `${diagnosticsFileName} (${line + 1},${character + 1}): ${text}`;
 }
 
-const result = validateConfigsWithTs([
-    ["./semi.json", "./linter.d.ts"]
-]);
-console.log(result);
+export function validate(
+    jsonWithDeclaration: Readonly<JsonPathWithTypePath[]>,
+    validationOptions: ValidationOptions = {
+        isDiagnosticsFileCreated: false,
+    },
+    compilerOptions = defaultTsValidatorCompilerOptions
+): IO<R | R & W, ReadonlyArray<JsonError>>  {
+    const errors: JsonError[] = [];
+    for (const [jsonFile, typesPath] of jsonWithDeclaration) {
+        const typesContents = fs.readFileSync(
+            path.join(process.cwd(), typesPath)
+        ).toString();
+
+        if (validationOptions.isDiagnosticsFileCreated) {
+            writeTempTsFile(jsonFile, typesContents);
+        }
+
+        const [tempTsFileName, tempTsFileContents] = getTempTsFileContents(jsonFile, typesContents);
+        const configErrors = compileTsAndGetErrors(tempTsFileName, compilerOptions, tempTsFileContents, validationOptions);
+        if (configErrors.length) {
+            errors.push({
+                jsonPath: jsonFile,
+                jsonErrors: configErrors,
+            });
+        }
+    }
+    return errors;
+}
+
+export default validate;
+

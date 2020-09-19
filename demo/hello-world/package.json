@@ -1,0 +1,15 @@
+{
+  "name": "hello-world",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "json-lint-d-ts": "file:./../.."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
