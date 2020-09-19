@@ -1,0 +1,9 @@
+{
+  "name": "json-scheme-example",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "jsonschema": "^1.2.6"
+  }
+}
