@@ -7,6 +7,11 @@ type W = typeof fs.writeFileSync;
 
 type IO<M = (R | W | (R | W) | (R & W) ), S = void> = S;
 
+type TempName = string;
+type TempFileContents = string;
+type TempFile = [TempName, TempFileContents]
+
+
 const tsOptions: ts.CompilerOptions = {
     transpileOnly: true,
     skipLibCheck: true,
@@ -17,24 +22,26 @@ const tsOptions: ts.CompilerOptions = {
 
 const IS_DIAGNOSTICS_FILE_CREATED = false;
 
-function writeTempTsFile(configPath: string, typesContents: string): IO<W, string> {
+function getConfigDefinitionInTS(configFileContents) {
+    return `const config: Root = ${configFileContents}`;
+}
+
+function prepareConfigContentsAndName(configPath: string, typesContents: string) {
     const configFileContents = fs.readFileSync(configPath);
-    const configContents = `const config: Root = ${configFileContents}`;
+    const configContents = getConfigDefinitionInTS(configFileContents);
     const tempTsFileName = `${path.basename(configPath)}.ts`;
     const tempTsFileContents = `${typesContents}\n${configContents}`;
+    return {tempTsFileName, tempTsFileContents};
+}
+
+function writeTempTsFile(configPath: string, typesContents: string): IO<W, string> {
+    const {tempTsFileName, tempTsFileContents} = prepareConfigContentsAndName(configPath, typesContents);
     fs.writeFileSync(tempTsFileName, tempTsFileContents);
     return tempTsFileName;
 }
 
-type TempName = string;
-type TempFileContents = string;
-type TempFile = [TempName, TempFileContents]
-
 function getTempTsFileContents(configPath: string, typesContents: string): IO<R, TempFile> {
-    const configFileContents = fs.readFileSync(configPath);
-    const configContents = `const config: Root = ${configFileContents}`;
-    const tempTsFileName = `${path.basename(configPath)}.ts`;
-    const tempTsFileContents = `${typesContents}\n${configContents}`;
+    const {tempTsFileName, tempTsFileContents} = prepareConfigContentsAndName(configPath, typesContents);
     return [tempTsFileName, tempTsFileContents];
 }
 
