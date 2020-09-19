@@ -1,5 +1,5 @@
 const fs = require("fs");
-const schema = require("./schema");
+const schema = require("./semi.schema.json");
 
 const { Validator } = require('jsonschema');
 const v = new Validator();
