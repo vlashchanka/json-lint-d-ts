@@ -1,6 +1,6 @@
 {
   "name": "json-lint-d-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Lint JSON files with Typescript declaration files",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -19,6 +19,25 @@
     "url": "git@github.com:vlashchanka/json-lint-d-ts.git"
   },
   "author": "vitalij.lashenko@gmail.com",
+  "homepage": "https://github.com/vlashchanka/json-lint-d-ts",
+  "keywords": [
+    "configs",
+    "config",
+    "configuration",
+    "scheme",
+    "schema",
+    "json",
+    "json-schema",
+    "json-scheme",
+    "joi",
+    "lint",
+    "linter",
+    "linting",
+    "typescript",
+    "ts",
+    "validate",
+    "validator"
+  ],
   "license": "MIT",
   "dependencies": {
     "typescript": "^4.0.2"
