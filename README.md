@@ -1,6 +1,8 @@
 json-lint-d-ts
 ------
 [![npm](https://img.shields.io/npm/v/json-lint-d-ts.svg?maxAge=2592000)](https://www.npmjs.com/package/json-lint-d-ts)
+![Node.js CI](https://github.com/vlashchanka/json-lint-d-ts/workflows/Node.js%20CI/badge.svg)
+
 
 ![image](assets/icon.svg)
 ------
