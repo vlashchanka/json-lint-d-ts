@@ -66,6 +66,25 @@ The `result` of the validation:
 
 The usage example could be found in `demo/hello-world` folder.
 
+## Troubleshooting
+
+You could pass boolean value `isDiagnosticsFileCreated` in the object as a second
+argument to the `validate` function
+
+```typescript
+import { validate } from "json-lint-d-ts";
+
+const result = validate([
+    ["./hello.json", "./hello.d.ts"],
+], {
+    isDiagnosticsFileCreated: true,
+});
+```
+
+This will generate a joined file near your json document `hello.json.ts`
+with your types and json content where you could manually compare the difference.
+
+
 ## How does all this work?
 Under the hood *json-lint-d-ts* uses Typescript Compiler by extending compiler host.
 JSON objects are loaded from filesystem and compared against passed `.d.ts` files.
@@ -73,6 +92,11 @@ The result is extracted from diagnostics.
 
 ## Contributing
 Please do!
+
+## Alternatives
+
+- [jsonschema](https://www.npmjs.com/package/jsonschema): JSON Schema is a vocabulary that allows you to annotate and validate JSON documents http://json-schema.org/.
+- [joi](https://www.npmjs.com/package/joi): schema description language and data validator for JavaScript.
 
 ## Enjoy
 
