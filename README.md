@@ -1,5 +1,6 @@
 json-lint-d-ts
 ------
+[![npm](https://img.shields.io/npm/v/json-lint-d-ts.svg?maxAge=2592000)](https://www.npmjs.com/package/json-lint-d-ts)
 
 ![image](assets/icon.svg)
 ------
