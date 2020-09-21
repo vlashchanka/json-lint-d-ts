@@ -2,6 +2,8 @@ json-lint-d-ts
 ------
 [![npm](https://img.shields.io/npm/v/json-lint-d-ts.svg?maxAge=2592000)](https://www.npmjs.com/package/json-lint-d-ts)
 ![Node.js CI](https://github.com/vlashchanka/json-lint-d-ts/workflows/Node.js%20CI/badge.svg)
+[![Dependency Status][1]][2]
+[![Dev Dependency Status][3]][4]
 
 
 ![image](assets/icon.svg)
@@ -104,3 +106,9 @@ Please do!
 ## Enjoy
 
 🚀
+
+[1]: https://david-dm.org/vlashchanka/json-lint-d-ts.svg
+[2]: https://david-dm.org/vlashchanka/json-lint-d-ts
+[3]: https://david-dm.org/vlashchanka/json-lint-d-ts/dev-status.svg
+[4]: https://david-dm.org/vlashchanka/json-lint-d-ts?type=dev
+  
