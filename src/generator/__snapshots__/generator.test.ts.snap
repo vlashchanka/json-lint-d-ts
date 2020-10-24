@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generate() should generate typescript file from json 1`] = `
+"export interface LintRule {
+    id:          string;
+    name:        string;
+    description: string;
+    level:       string;
+    isLevel:     boolean;
+}
+
+interface Root extends LintRule {}"
+`;
+
+exports[`generate() should return error list for for inconsistent json and delcaration 1`] = `
+"export interface LintRule {
+    id:          string;
+    name:        string;
+    description: string;
+    level:       string;
+    isLevel:     boolean;
+}
+
+interface Root extends LintRule {}"
+`;

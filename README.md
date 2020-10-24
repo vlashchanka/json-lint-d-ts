@@ -16,6 +16,8 @@ Write type safe json files in your project with Typescript.
 
 ## Usage
 
+### Validation
+
 Import `validate` function and pass all your JSON files paths with their type declarations.
 
 ```typescript
@@ -70,6 +72,44 @@ The `result` of the validation:
 ```
 
 The usage example could be found in `demo/hello-world` folder.
+
+
+### Generation
+
+It is possible to generate typescript files automatically for existing jsons ([quicktype](https://github.com/quicktype/quicktype) is used under the hood).
+
+```typescript
+const name = "LintRule";
+generate(
+    {
+        id: "rule-semi",
+        name: "semi",
+        description: "Rule to describe usage of semicolons",
+        level: "warning",
+        isLevel: false,
+    },
+    {
+        name: name,
+        shouldOutput: true,
+    }
+);
+```
+
+It will output the file: `LintRule.d.ts` with the following contents:
+
+```typescript
+export interface LintRule {
+    id:          string;
+    name:        string;
+    description: string;
+    level:       string;
+    isLevel:     boolean;
+}
+
+interface Root extends LintRule {}
+```
+
+
 
 ## Troubleshooting
 

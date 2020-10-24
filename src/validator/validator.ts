@@ -89,6 +89,12 @@ function diagnosticToMessage(diagnostic: ts.Diagnostic, validationOptions: Valid
     return `${diagnosticsFileName} (${line + 1},${character + 1}): ${text}`;
 }
 
+/**
+ * Validation json files using Typescript declaration files
+ * @param jsonWithDeclaration
+ * @param validationOptions
+ * @param compilerOptions
+ */
 export function validate(
     jsonWithDeclaration: Readonly<JsonPathWithTypePath[]>,
     validationOptions: ValidationOptions = {
