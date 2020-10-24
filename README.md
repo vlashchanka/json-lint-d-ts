@@ -76,7 +76,7 @@ The usage example could be found in `demo/hello-world` folder.
 
 ### Generation
 
-It is possible to generate typescript files automatically for existing jsons ([quicktype](https://github.com/quicktype/quicktype) is used under the hood).
+It is possible to generate typescript files automatically for existing jsons:
 
 ```typescript
 const name = "LintRule";
@@ -131,9 +131,16 @@ with your types and json content where you could manually compare the difference
 
 
 ## How does all this work?
+
+### JSON validation:
+
 Under the hood *json-lint-d-ts* uses Typescript Compiler by extending compiler host.
 JSON objects are loaded from filesystem and compared against passed `.d.ts` files.
 The result is extracted from diagnostics. 
+
+### Typescript Schema generation:
+
+For Typescript files generation from raw JSON [quicktype](https://github.com/quicktype/quicktype) is used
 
 ## Contributing
 Please do!
