@@ -13,7 +13,7 @@ describe("generate()", () => {
             },
             {
                 name: name,
-                shouldOutput: true,
+                shouldOutput: false,
             }
         );
         expect(result).toMatchSnapshot();
