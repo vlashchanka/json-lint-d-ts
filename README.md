@@ -136,47 +136,47 @@ In case API returns such data back:
     "total_pages": 2,
     "data": [{
         "id": 1,
-        "email": "george.bluth@reqres.in",
+        "email": "george.bluth@yourwebsite.com",
         "first_name": "George",
         "last_name": "Bluth",
-        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/calebogden/128.jpg"
+        "avatar": "https://s3.amazonaws.com/avatar.jpg"
     }, {
         "id": 2,
-        "email": "janet.weaver@reqres.in",
+        "email": "janet.weaver@yourwebsite.com",
         "first_name": "Janet",
         "last_name": "Weaver",
-        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"
+        "avatar": "https://s3.amazonaws.com/avatar.jpg"
     }, {
         "id": 3,
-        "email": "emma.wong@reqres.in",
+        "email": "emma.wong@yourwebsite.com",
         "first_name": "Emma",
         "last_name": "Wong",
-        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/olegpogodaev/128.jpg"
+        "avatar": "https://s3.amazonaws.com/avatar.jpg"
     }, {
         "id": 4,
-        "email": "eve.holt@reqres.in",
+        "email": "eve.holt@yourwebsite.com",
         "first_name": "Eve",
         "last_name": "Holt",
-        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/marcoramires/128.jpg"
+        "avatar": "https://s3.amazonaws.com/avatar.jpg"
     }, {
         "id": 5,
-        "email": "charles.morris@reqres.in",
+        "email": "charles.morris@yourwebsite.com",
         "first_name": "Charles",
         "last_name": "Morris",
-        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/stephenmoon/128.jpg"
+        "avatar": "https://s3.amazonaws.com/avatar.jpg"
     }, {
         "id": 6,
-        "email": "tracey.ramos@reqres.in",
+        "email": "tracey.ramos@yourwebsite.com",
         "first_name": "Tracey",
         "last_name": "Ramos",
-        "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/bigmancho/128.jpg"
+        "avatar": "https://s3.amazonaws.com/avatar.jpg"
     }],
     "ad": {
-        "company": "StatusCode Weekly",
-        "url": "http://statuscode.org/",
-        "text": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+        "company": "Weekly News",
+        "url": "http://news.org/",
+        "text": "A weekly newsletter focusing on development"
     }
-}
+    }
 ```
  the following TS file would be generated:
 
