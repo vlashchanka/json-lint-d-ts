@@ -11,3 +11,30 @@ exports[`generate() should generate typescript file from json 1`] = `
 
 interface Root extends LintRule {}"
 `;
+
+exports[`generateAsync() should generate typescript file from url 1`] = `
+"export interface UsersEndpoint {
+    page:        number;
+    per_page:    number;
+    total:       number;
+    total_pages: number;
+    data:        Datum[];
+    ad:          Ad;
+}
+
+export interface Ad {
+    company: string;
+    url:     string;
+    text:    string;
+}
+
+export interface Datum {
+    id:         number;
+    email:      string;
+    first_name: string;
+    last_name:  string;
+    avatar:     string;
+}
+
+interface Root extends UsersEndpoint {}"
+`;
