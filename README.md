@@ -118,7 +118,7 @@ url samples:
 
 ```typescript
 const name = "UsersEndpoint";
-const result = await generateAsync(["https://reqres.in/api/users?page=1"],
+const result = await generateAsync(["https://yourwebsite.com/api/users?page=1"],
     {
         name: name,
         shouldOutput: true,
