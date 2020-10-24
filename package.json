@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "build": "tsc",
-    "test": "jest",
+    "test": "jest src/**/*.ts",
     "lint": "eslint src/**/*.ts",
     "prepare": "yarn lint && yarn test && yarn build",
     "ci": "yarn prepare"
